@@ -1,0 +1,14 @@
+Сообщение обратной связи
+
+Имя: {{ name }}
+Телефон: {{ phone }}
+E-mail: {{ user_email }}
+Сообщение:
+{{ text }}
+
+{% if browser_info %}
+Информация о браузере:
+{{ browser_info }}
+{% endif %}
+
+Дата и время: {% now "SHORT_DATETIME_FORMAT" %}

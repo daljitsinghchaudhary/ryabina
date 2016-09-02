@@ -1,0 +1,12 @@
+Обратный звонок № {{ callback.id }}
+
+{{ callback.name }} ждет обратного звонка.
+
+Телефон: {{ callback.phone }}
+Перезвонить: {{ callback.get_callback_delta }}
+Необходимо позвонить в: {{ callback.callback_time|date:"H:i" }}
+
+Дата и время обращения: {{ callback.created_at|date:"SHORT_DATETIME_FORMAT" }}
+------------
+С уважением,
+Стоматологический центр "Рябина"

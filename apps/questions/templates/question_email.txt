@@ -1,0 +1,10 @@
+Вопрос № {{ question.id }}
+
+{{ question.name }} спрашивает:
+{{ question.question }}
+E-mail: {{ question.email }}
+
+Дата и время обращения: {{ question.created_at|date:"SHORT_DATETIME_FORMAT" }}
+------------
+С уважением,
+Стоматологический центр "Рябина"

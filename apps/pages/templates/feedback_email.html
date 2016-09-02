@@ -1,0 +1,12 @@
+<h1>Сообщение обратной связи</h1>
+<p></p>
+<p><b>Имя:</b> {{ name }}</p>
+<p><b>Телефон:</b> {{ phone }}</p>
+<p><b>E-mail:</b> {{ user_email }}</p>
+<p><b>Сообщение:</b></p>
+<p>{{ text }}</p>
+{% if browser_info %}
+<p><b>Информация о браузере:</b></p>
+<p>{{ browser_info }}</p>
+{% endif %}
+<p><b>Дата и время:</b>{% now "SHORT_DATETIME_FORMAT" %}</p>

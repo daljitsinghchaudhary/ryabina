@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block js %}
+    <script src="{{ STATIC_URL }}swiper/swiper.jquery.js"></script>
+    <script src="{{ STATIC_URL }}parallax/parallax.js"></script>
+    <script src="{{ STATIC_URL }}sticky-kit/jquery.sticky-kit.js"></script>
+    <script src="{{ STATIC_URL }}js/imagesloaded.pkgd.js"></script>
+    <script src="{{ STATIC_URL }}isotope/dist/isotope.pkgd.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
+{% endblock %}
+
+{% block css %}
+    <link href="{{ STATIC_URL }}swiper/swiper.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<section class="hero" style="background-image: url('{{ STATIC_URL }}img/hero/default.jpg');">
+    <div id="swiper_header_hero" class="swiper-container swiper_header_hero">
+        <div class="swiper-wrapper">
+            {% for image in slideshow %}
+                {% thumbnail image.image "1600x650" crop="center" as thumb %}
+                <div class="swiper-slide" style="background-image: url('{{ thumb.url }}')">
+                    {% if image.content %}
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-0 swiper_message">
+                                {% if image.title %}<h3>{{ image.title }}</h3>{% endif %}
+                                {{ image.content|safe }}
+                                {% if image.url and image.button %}<p class="swiper_button hidden-xs"><a href="{{ image.url|safe }}" class="pull-right btn btn-default">{{ image.button }}</a></p>{% endif %}
+                            </div>
+                        </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% endthumbnail %}
+            {% endfor %}
+        </div>
+        <div class="container">
+            <div class="swiper-pagination hidden-xs"></div>
+            <div class="swiper-button-prev_small visible-xs"><span class="icon-angle-left"></span></div>
+            <div class="swiper-button-next_small visible-xs"><span class="icon-angle-right"></span></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div class="container">
+        <div class="row" data-sticky_parent>
+            <div class="col-sm-12 col-md-8 services_col">
+                <h4>Направления</h4>
+                <div class="row service_container service_isotope_grid">
+                {% for course in courses %}
+                    <div class="col-xs-12 col-sm-6 service_col service_isotope_item">
+                        {% if course.icon %}
+                            <div class="row">
+                                <div class="col-xs-4"><div class="service_image"><img src="{{ MEDIA_URL }}{{ course.icon.image }}"></div></div>
+                                <div class="col-xs-8">
+                                    <h3>{{ course.get_short_title }}</h3>
+                                    {% if course.description %}<p>{{ course.description|safe }}</p>{% endif %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <h3>{{ course.title }}</h3>
+                            {% if course.description %}<p>{{ course.description|safe }}</p>{% endif %}
+                        {% endif %}
+                        {% if course.url %}
+                        <p class="service_button"><a href="{{ course.url }}" class="btn btn-default pull-right">{% if course.button %}{{ course.button }}{% else %}Узнать подробнее{% endif %}</a></p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="row">
+                    <p class="text-center service_button"><a href="{% url 'pages:services' %}" class="btn btn-default">Услуги центра</a></p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 discounts_col">
+                <div class="sticky-discount">
+                    <div class="discount-wrapper">
+                        <div class="discount-container">
+                            <h4>Акции месяца</h4>
+                            <div class="swiper-button-prev_discount"><span class="icon-angle-left"></span></div>
+                            <div class="swiper-button-next_discount"><span class="icon-angle-right"></span></div>
+                            <div id="swiper_discount" class="swiper-container swiper_discount">
+                                <div class="swiper-wrapper">
+                                    {% for discount in discounts %}
+                                        <div class="swiper-slide text-center">
+                                            <a class="discount" href="javascript:void(0);">{{ discount.title }}</a>
+                                            {% if discount.image %}
+                                                {% thumbnail discount.image "350x350" crop="center" as thumb %}
+                                                    <div class="discount_image"><img src="{{ thumb.url }}"></div>
+                                                {% endthumbnail %}
+                                            {% endif%}
+                                            <p class="price">{% if discount.percent %}скидка {{ discount.percent }}<sup>%</sup>{% else %}{% if discount.price or discount.old_price %}{% if discount.old_price %}<sup class="old_price">{{ discount.old_price }}</sup>{% endif %}{{ discount.current_price }}<sup>RUB</sup>{% else %}БЕСПЛАТНО{% endif %}{% endif %}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <p class="text-center discount_button"><a href="{% url 'pages:services' %}#discounts" class="btn btn-default">Смотреть все акции</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if parallax %}
+{% thumbnail parallax.image "1600x650" crop="center" as thumb %}
+<div class="parallax-container" data-parallax="scroll" data-position="top" data-bleed="10" data-image-src="{{ thumb.url }}" data-natural-width="1600" data-natural-height="650"></div>
+{% endthumbnail %}
+{% endif %}
+<div id="content-news" class="limited">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="newsboard__heading text-center">
+                    <h3>Новости стоматологического центра</h3>
+                    <a class="see_all" href="javascript:void(0)">Смотреть все новости <span class="icon-angle-right"></span></a>
+                </div>
+                <div class="row newsboard_isotope_grid newsboard">
+                    {% for news in newsboard %}
+                    <div class="col-sm-6 col-md-4 newsboard_isotope_item news_item">
+                        <div class="news_item__content">
+                        {% if news.image %}
+                            {% thumbnail news.image "350" crop="center" as thumb %}
+                            <a href="javascript:void(0);"><div class="news_item__img"><img src="{{ thumb.url }}"></div></a>
+                            {% endthumbnail %}
+                        {% endif %}
+                        <div class="news_item__heading">{% if news.content %}<a href="javascript:void(0);">{{ news.title }}</a>{% else %}{{ news.title }}{% endif %}</div>
+                        <div class="news_item__category">
+                            <a href="">Новость</a><span class="delimeter"></span><span class="news_item__date">{{ news.created_at|date:"DATE_FORMAT" }}</span>
+                        </div>
+                        <div class="news_item__text">{{ news.announce }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newsboard_expand text-center"><span class="icon-angle-down"></span></div>
+</div>
+
+<div id="content-contacts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalQuestion">Задать вопрос</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalVisit">Записаться на приём</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalCallback">Обратный звонок</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="social_container">
+                    <div class="social-tabs">
+                        <h4>Присоединяйтесь</h4>
+                        <ul class="social-tabs__nav" role="tablist">
+                            <li class="social-tabs__nav__item social-tabs__nav__item_vk active" role="presentation">
+                                <a href="#social-tabs-vk" aria-controls="social-tabs-vk" role="tab" data-toggle="tab"><span class="icon-vk"></span></a>
+                            </li>
+                            <li class="social-tabs__nav__item social-tabs__nav__item_fb" role="presentation">
+                                <a href="#social-tabs-fb" aria-controls="social-tabs-fb" role="tab" data-toggle="tab"><span class="icon-facebook"></span></a>
+                            </li>
+                            <li class="social-tabs__nav__item social-tabs__nav__item_ok" role="presentation">
+                                <a href="#social-tabs-ok" aria-controls="social-tabs-ok" role="tab" data-toggle="tab"><span class="icon-odnoklassniki"></span></a>
+                            </li>
+                            <li class="social-tabs__nav__item social-tabs__nav__item_instagram hidden-md" role="presentation">
+                                <a href="https://www.instagram.com/ryabinaclinic/" target="_blank"><span class="icon-instagram"></span></a>
+                            </li>
+                            <li class="social-tabs__nav__item social-tabs__nav__item_twitter hidden-md" role="presentation">
+                                <a href="#social-tabs-twitter" aria-controls="social-tabs-twitter" role="tab" data-toggle="tab"><span class="icon-twitter"></span></a>
+                            </li>
+                            <li class="social-tabs__nav__item social-tabs__nav__item_youtube hidden-md" role="presentation">
+                                <a href="https://www.youtube.com/channel/UCPRFq4OIUmXr0DX3vR927dQ" target="_blank"><span class="icon-youtube-play"></span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content social-tabs__content">
+                            <div id="social-tabs-vk" class="tab-pane fade in active" role="tabpanel">
+                                <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+                                <div id="vk_groups" style="height: 330px; width: 330px; background: none;"></div>
+                                <script type="text/javascript">VK.Widgets.Group("vk_groups", {mode: 0, width: "330", height: "330", color1: 'FFFFFF', color2: '2B2F33', color3: '6287AE'}, 69214565);</script>
+                            </div>
+                            <div id="social-tabs-fb" class="tab-pane fade" role="tabpanel">
+                                <script>(function(d, s, id) {
+                                  var js, fjs = d.getElementsByTagName(s)[0];
+                                  if (d.getElementById(id)) return;
+                                  js = d.createElement(s); js.id = id;
+                                  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.6";
+                                  fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+                                <div class="fb-page" data-href="https://www.facebook.com/ryabinaclinic" data-tabs="timeline" data-height="330" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/ryabinaclinic" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ryabinaclinic">Стоматологический центр &quot;Рябина&quot;</a></blockquote></div>
+                            </div>
+                            <div id="social-tabs-ok" class="tab-pane fade" role="tabpanel">
+                                <div id="ok_group_widget"></div>
+                                <script>
+                                !function (d, id, did, st) {
+                                  var js = d.createElement("script");
+                                  js.src = "https://connect.ok.ru/connect.js";
+                                  js.onload = js.onreadystatechange = function () {
+                                  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                                    if (!this.executed) {
+                                      this.executed = true;
+                                      setTimeout(function () {
+                                        OK.CONNECT.insertGroupWidget(id,did,st);
+                                      }, 0);
+                                    }
+                                  }}
+                                  d.documentElement.appendChild(js);
+                                }(document,"ok_group_widget","53237709602992","{width:341,height:335}");
+                                </script>
+                            </div>
+                            <div id="social-tabs-instagram" class="tab-pane fade" role="tabpanel"></div>
+                            <div id="social-tabs-twitter" class="tab-pane fade" role="tabpanel">
+                                <a class="twitter-timeline" href="https://twitter.com/ryabinaclinic">Твиты стоматологического центра</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </div>
+                            <div id="social-tabs-youtube" class="tab-pane fade" role="tabpanel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="contacts_container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            {% if contacts_image.image %}
+                            <div class="contacts_img_container">
+                            {% thumbnail contacts_image.image "350x350" crop="center" as thumb %}
+                            <div class="contacts_img">
+                                <img src="{{ thumb.url }}">
+                            </div>
+                            {% endthumbnail %}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="col-md-7">
+                            <h3>Контактные данные</h3>
+                            <p>
+                                <small class="display-block">Телефон для связи:</small>
+                                <a class="phone" href="tel:+79219177536"><span class="icon-phone"></span> (812) 917-75-36</a>
+                            </p>
+                            <address>
+                            <p>
+                                <small class="display-block">Наш адрес:</small>
+                                <span class="icon-map-marker"></span><span class="pseudo_link"> Санкт-Петербург, 16 линия, д. 11, лит. Б</span>
+                            </p>
+                            </address>
+                            <p>
+                                <small class="display-block">Мы работаем для вас:</small>
+                                <span class="icon-clock-o"></span><span class="pseudo_link"> С 10 до 21 без выходных</span>
+                            </p>
+                            <p>
+                                <small class="display-block">Почта для электронных сообщений:</small>
+                                <a class="maillink" href="mailto:info@ryabinaclinic.ru"><span class="icon-envelope-o"></span> info@ryabinaclinic.ru</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="mission"><span class="quot">&laquo;</span>Мы делаем всё для того, чтобы ваши зубы всегда оставались здоровыми и красивыми!<span class="quot">&raquo;</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+/.idea
+**~
+**.pyc
+**.pyo
+public
+media
+ryabina/settings/local.py

@@ -1,0 +1,238 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="ru" class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html lang="ru" class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html lang="ru" class="lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ru">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block meta_description %}{{ SITE_TITLE }}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{{ SITE_TITLE }}{% endblock %}">
+    <meta name="title" content="{% block meta_title %}{{ SITE_TITLE }}{% endblock %}">
+    <meta name="author" content="Aleksey Sinyawskiy <sinyawskiy@gmail.com>">
+    <meta name="copyright" content="{{ SITE_TITLE }}, http://{{ DOMAIN }}">
+    <title>{% block title %}{{ SITE_TITLE }}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="{{ STATIC_URL  }}img/favicon.ico" type="image/x-icon"/>
+    <link href="{{ STATIC_URL }}bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}font/lobster/styles.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}font/bliss/styles.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}font/icomoon/style.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
+    {% block css %}{% endblock %}
+</head>
+<body>
+<div class="navbar-wrapper">
+    <div class="container">
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand logo_svg_text" href="/"></a>
+                </div>
+                <div class="navbar-contacts">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="phone"><a href="tel:+79219177536"><span class="icon-phone"></span>(812) 917-75-36</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% url 'pages:main' as main_url %}
+                        <li class="menu{% if request.path == main_url %} active{% endif %}"><a href="{{ main_url }}">Главная</a></li>
+                        {% url 'pages:services' as services_url %}
+                        <li class="menu{% if request.path == services_url %} active{% endif %}"><a href="{{ services_url }}">Услуги</a></li>
+                        {% url 'pages:contacts' as contacts_url %}
+                        <li class="menu{% if request.path == contacts_url %} active{% endif %}"><a href="{{ contacts_url }}">Контакты</a></li>
+                        <li class="social vk hidden-xs hidden-sm"><a href="http://vk.com/club69214565"><span class="icon-vk"></span></a></li>
+                        <li class="social fb hidden-xs hidden-sm"><a href="https://www.facebook.com/ryabinaclinic/"><span class="icon-facebook"></span></a></li>
+                        <li class="social ok hidden-xs hidden-sm"><a href="https://ok.ru/group/53237709602992"><span class="icon-odnoklassniki"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block header %}
+<section class="hero" style="background-image: url('{{ STATIC_URL }}img/hero/default.jpg');"></section>
+{% endblock %}
+
+{% block content %}{% endblock %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="footer_logo"></div>
+                <div class="footer_copyright">
+                    <p><span class="copyright_symbol">©</span> 2010 - {% now "Y" %}. Стоматологический центр «Рябина»</p>
+                    <p>Имеются противопоказания, необходимо проконсультироваться с врачом. Информационные материалы и цены, размещенные на сайте, не являются публичной офертой. Все права защищены.</p>
+                </div>
+                <div class="footer_als">
+                    <p>Сделано <a href="https://www.sinyawskiy.ru">ALS</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+if(typeof(Ryabina) === 'undefined'){Ryabina={};}
+if(typeof(Ryabina.App) === 'undefined'){Ryabina.App={};}
+Ryabina.debug = {% if DEBUG %}1{% else %}!1{% endif %};
+</script>
+<!--[if lt IE 9]>
+<script src="{{ STATIC_URL }}html5shiv/es5-shim.min.js"></script>
+<script src="{{ STATIC_URL }}html5shiv/html5shiv.min.js"></script>
+<script src="{{ STATIC_URL }}html5shiv/html5shiv-printshiv.min.js"></script>
+<script src="{{ STATIC_URL }}respond/respond.min.js"></script>
+<![endif]-->
+<script src="{{ STATIC_URL }}jquery/js/jquery-2.1.1.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.maskedinput.js"></script>
+<script src="{{ STATIC_URL }}bootstrap-3.3.2-dist/js/bootstrap.js"></script>
+<script src="{{ STATIC_URL }}moment/moment-with-locales.js"></script>
+<script src="{{ STATIC_URL }}bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{{ STATIC_URL }}bootbox/bootbox.js"></script>
+<script src="{{ STATIC_URL }}underscore/underscore.js"></script>
+<script>
+    Ryabina.App.current_date = '{% now "SHORT_DATETIME_FORMAT" %}';
+    Ryabina.App.messages = [{% for message in messages %}'{{ message }}'{% if not forloop.last %},{% endif %}{% endfor %}];
+</script>
+<script type="text/template" id="success_dialog_template">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"><span class="icon-cross"></span></button>
+            <h4><%= success_message %></h4>
+        </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="visit_dialog_template">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"><span class="icon-cross"></span></button>
+                <h3>Online запись</h3>
+                <h4>Добро пожаловать в стоматологический центр "Рябина"</h4>
+                {% if visit_form.non_field_errors or visit_form.errors %}
+                <legend class="error">Ошибка!</legend>
+                    {% if visit_form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <p>{{ visit_form.non_field_errors }}</p>
+                        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                    </div>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+                <form role="form" method="POST" action="{% url 'questions:visit' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_field visit_form.name show_label=True %}
+                    <div class="row">
+                        <div class="col-md-6">{% bootstrap_field visit_form.phone show_label=True %}</div>
+                        <div class="col-md-6">{% bootstrap_field visit_form.email show_label=True %}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">{% bootstrap_field visit_form.purpose show_label=True %}</div>
+                        <div class="col-md-6">{% bootstrap_field visit_form.procedure show_label=True %}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">{% bootstrap_field visit_form.visit_date show_label=True %}</div>
+                        <div class="col-md-6">{% bootstrap_field visit_form.visit_time show_label=True %}</div>
+                    </div>
+                    {% bootstrap_field visit_form.description show_label=True %}
+                    {% bootstrap_field visit_form.captcha show_label=True %}
+                    <div class="form-group controls">
+                        <button type="button" class="btn btn-default submit">Записаться</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="question_dialog_template">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"><span class="icon-cross"></span></button>
+                <h3>У вас есть вопрос?</h3>
+                <h4>Мы обязательно вам ответим</h4>
+                {% if question_form.non_field_errors or question_form.errors %}
+                <legend class="error">Ошибка!</legend>
+                    {% if question_form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <p>{{ question_form.non_field_errors }}</p>
+                        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                    </div>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+                <form role="form" method="POST" action="{% url 'questions:question' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in question_form %}
+                        {% bootstrap_field field show_label=True %}
+                    {% endfor %}
+                    <div class="form-group controls">
+                        <button type="button" class="btn btn-default submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="callback_dialog_template">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"><span class="icon-cross"></span></button>
+                <h3>Обратный звонок</h3>
+                <h4>Мы свяжемся с вами в удобное для вас время</h4>
+                {% if callback_form.non_field_errors or callback_form.errors %}
+                <legend class="error">Ошибка!</legend>
+                    {% if callback_form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <p>{{ callback_form.non_field_errors }}</p>
+                        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                    </div>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+                <form role="form" method="POST" action="{% url 'questions:callback' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in callback_form %}
+                        {% bootstrap_field field show_label=True %}
+                    {% endfor %}
+                    <div class="form-group controls">
+                        <button type="button" class="btn btn-default submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+<script src="{{ STATIC_URL }}js/base.js"></script>
+{% block js %}{% endblock %}
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter42111234 = new Ya.Metrika({ id:42111234, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true, ecommerce:"dataLayer" }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/42111234" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90361472-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

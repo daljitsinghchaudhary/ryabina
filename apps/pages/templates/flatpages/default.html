@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load thumbnail bootstrap3 custom_bootstrap3 %}
+
+{% block meta_title %}{% firstof current_page.meta_title current_page.title %} - {{ block.super }}{% endblock meta_title %}
+
+
+{% block meta_keywords %}{{ current_page.meta_keywords }}{% endblock meta_keywords %}
+
+
+{% block meta_description %}{{ current_page.meta_description }}{% endblock meta_description %}
+
+
+{% block js %}
+<script type="text/template" id="comment_dialog_template">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"><span class="icon-cross"></span></button>
+                <h3>Добавить отзыв о центре "Рябина"</h3>
+                <h4>Мы очень хотим, чтобы вы были довольны</h4>
+                {% if comment_form.non_field_errors or visit_form.errors %}
+                <legend class="error">Ошибка!</legend>
+                    {% if comment_form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <p>{{ comment_form.non_field_errors }}</p>
+                        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                    </div>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+                <form role="form" method="POST" action="{% url 'custom_comments:add_comment' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in comment_form %}
+                        {% if field.name not in comment_form.excluded_fields %}
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="control-label" for="id_rating_0">Оценка</label>
+                                        <div id="id_rating">
+                                            <div class="stars">
+                                                <input id="id_rating_0" name="rating" required="required" title="" type="radio" value="5">
+                                                <label class="radio-inline glyphicon glyphicon-star-empty" for="id_rating_0"></label>
+                                                <input id="id_rating_1" name="rating" required="required" title="" type="radio" value="4">
+                                                <label class="radio-inline glyphicon glyphicon-star-empty" for="id_rating_1"></label>
+                                                <input id="id_rating_2" name="rating" required="required" title="" type="radio" value="3">
+                                                <label class="radio-inline glyphicon glyphicon-star-empty" for="id_rating_2"></label>
+                                                <input id="id_rating_3" name="rating" required="required" title="" type="radio" value="2">
+                                                <label class="radio-inline glyphicon glyphicon-star-empty" for="id_rating_3"></label>
+                                                <input checked="checked" id="id_rating_4" name="rating" required="required" title="" type="radio" value="1">
+                                                <label class="radio-inline glyphicon glyphicon-star-empty" for="id_rating_4"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">{% bootstrap_field comment_form.name show_label=True %}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">{% bootstrap_field comment_form.email show_label=True %}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">{% bootstrap_field comment_form.object_pk show_label=True %}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">{% bootstrap_field comment_form.photo show_label=True %}
+                            <div id="photo_container">
+                                <div class="photo img-rounded" style="{% if comment_form.photo.value %}background: url('{{ comment_form.photo.value }}') no-repeat; height:240px;{% endif %}">
+                                    <div class="change_photo" style="display:none;">Изменить</div>
+                                </div>
+                                <div class="delete_photo default" title="Удалить аватар"><span class="icon-cross"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% bootstrap_field comment_form.comment show_label=True %}
+                    {% bootstrap_field comment_form.url show_label=True %}
+                    <div class="form-group controls">
+                        <button type="button" class="btn btn-default submit">Опубликовать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+    <script src="{{ STATIC_URL }}flipping_gallery/jquery.flipping_gallery.js"></script>
+    <script src="{{ STATIC_URL }}flexmenu/flexmenu.js"></script>
+    <script src="{{ STATIC_URL }}js/imagesloaded.pkgd.js"></script>
+    <script src="{{ STATIC_URL }}isotope/dist/isotope.pkgd.js"></script>
+    <script src="{{ STATIC_URL }}js/fileuploader.js"></script>
+    <script src="{{ STATIC_URL }}jquery-cookie/jquery.cookie.js"></script>
+    <script>
+        Ryabina.App.category_id = {% if categories|length %}{{ categories.0.id }}{% else %}undefined{% endif %};
+        Ryabina.App.uploadPhotoUrl = '{% url 'custom_comments:upload_photo' %}';
+        Ryabina.App.deletePhotoUrl = '{% url 'custom_comments:delete_photo' %}';
+        Ryabina.App.defaultPhotoBackground = "url('{{ STATIC_URL }}img/default_main_avatar.png')";
+    </script>
+    <script src="{{ STATIC_URL }}js/services.js"></script>
+{% endblock %}
+
+{% block css %}
+    <link href="{{ STATIC_URL }}flipping_gallery/flipping_gallery.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/services.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<section class="hero">
+    <div class="img-holder">
+        {% if slideshow_image %}
+            {% thumbnail slideshow_image.image "1600x350" crop="center" as thumb %}<img src="{{ thumb.url }}">{% endthumbnail %}
+        {% else %}
+            <img src="{{ STATIC_URL }}img/hero/default.jpg">
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><h1>{{ page.title }}</h1></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div id="content-pages">
+    <div class="container">
+        {{ current_page.content|safe }}
+    </div>
+</div>
+{% if discounts|length %}
+<a name="discounts"></a>
+<div id="content-discounts">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="discounts__heading text-center">
+                    <h3>Акции стоматологического центра</h3>
+                </div>
+                <div class="row discounts_isotope_grid discounts">
+                    {% for discount in discounts %}
+                    <div class="col-sm-6 col-md-4 discounts_isotope_item discount_item">
+                        <div class="discount_item__content">
+                        {% if discount.image %}
+                            {% thumbnail discount.image "350" crop="center" as thumb %}
+                            <a href="javascript:void(0);"><div class="discount_item__img"><img src="{{ thumb.url }}"></div></a>
+                            {% endthumbnail %}
+                        {% endif %}
+                        <div class="discount_item__price">
+                            <p class="current_price">{% if discount.percent %}скидка {{ discount.percent }}<sup>%</sup>{% else %}{% if discount.price or discount.old_price %}{% if discount.old_price %}<sup class="old_price">{{ discount.old_price }}</sup>{% endif %} {{ discount.current_price }}<sup>RUB</sup>{% else %}БЕСПЛАТНО{% endif %}{% endif %}</p>
+                        </div>
+                        <div class="discount_item__heading">{{ discount.title }}</div>
+                        <div class="discount_item__category">
+                            <a href="">Акция</a><span class="delimeter"></span><span class="discount_item__date">{{ discount.created_at|date:"DATE_FORMAT" }}{% if discount.close_at %} до {{ discount.close_at|date:"DATE_FORMAT" }}{% endif %}</span>
+                        </div>
+                        <div class="discount_item__text">{{ discount.content|safe }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="col-sm-6 col-md-4 discounts_isotope_item discount_item">
+                        <div class="discount_item__content subscribe">
+                        <h4>Новые акции</h4>
+                        <div class="subscribe_item__heading text-center">Всегда будь в курсе!</div>
+                        {% if form.non_field_errors or form.errors %}
+                        <legend class="error">Ошибка!</legend>
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-error">
+                                <p>{{ form.non_field_errors }}</p>
+                                <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        <form role="form" method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {% bootstrap_field field show_label=True %}
+                            {% endfor %}
+                            <div class="form-group controls subscribe_button text-center">
+                                <button type="submit" class="btn btn-default">Подписаться</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div id="content-review">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalQuestion">Задать вопрос</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalVisit">Записаться на приём</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalCallback">Обратный звонок</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Отзывы наших счастливых пациентов</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="gallery">
+                {% for comment in comments %}
+                <div class="col-md-12">
+                    <div class="review_container">
+                        <div class="review_title">
+                            {% if comment.photo %}
+                                {% thumbnail comment.photo.photo "40x40" crop="center" as thumb %}
+                                <img src="{{ thumb.url }}" width="40" height="40">
+                                {% endthumbnail %}
+                            {% else %}
+                                <img src="{{ STATIC_URL }}img/logo/default_comment_photo.jpg" width="40" height="40">
+                            {% endif %}
+                            {% if comment.url %}
+                            <a class="name" href="{{ comment.url }}">{{ comment.name }}</a>
+                            {% else %}
+                            <span class="name">{{ comment.name }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="review_rating">
+                            <a href="javascript:void(0)">Отзыв</a>
+                            <span class="delimeter"></span>
+                            {{ comment.submit_date|date:"DATE_FORMAT" }}
+                            <span class="delimeter"></span>
+                            {% get_comment_object comment %}
+                            <span class="delimeter"></span>
+                            {% get_rating comment %}
+                        </div>
+                        <div class="review_text">
+                            <p>{{ comment.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+        <div class="review_button text-center">
+            <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalComment">Напишите свой отзыв</a><p>Нам будет очень приятно!</p>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

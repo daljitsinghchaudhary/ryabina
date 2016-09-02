@@ -1,0 +1,283 @@
+{% load kwacros portal_templatetags services_templatetags %}
+{% kwacro services_info service_annotated_list=None %}
+        {% for service_item, info in service_annotated_list %}
+            {% if info.open %}
+                {% if not forloop.first %}<ul>{% endif %}
+                <li>
+            {% else %}
+                </li><li>
+            {% endif %}
+
+            {% with service_item.get_children as service_children %}
+                {% if service_children|length %}
+                    <table cellpadding="5" cellspacing="0" border="0">
+                    <tr>
+                        <td valign="top" align="left"><span class="title">{{ service_item.title }}</span></td>
+                    </tr>
+                    </table>
+                {% else %}
+                    {% with service_item.get_price as item_price %}
+                    {% with service_item.discount_set.all as discount_set %}
+                    <table cellpadding="5" cellspacing="0" border="0">
+                    <tr>
+                        <td valign="top" align="left"><span class="item">{{ service_item.title }}</span></td>
+                        <td width="268px" valign="top" align="right"><span class="price">{% if item_price %}{{ item_price }} р.{% else %}{% endif %}</span></td>
+                    </tr>
+                    </table>
+                    {% if discount_set|length %}
+                        <table cellpadding="5" cellspacing="0" border="0">
+                        {% for discount in discount_set %}
+                        <tr>
+                            <td valign="top" align="left"><span class="discount">Акция! </span><span class="item">"{{ discount.title }}" с {{  discount.created_at|date:"SHORT_DATE_FORMAT" }}{% if discount.close_at %} до {{  discount.close_at|date:"SHORT_DATE_FORMAT" }}{% endif %}</span></td>
+                            <td width="268px" valign="top" align="right"><span class="price">
+                            {% if discount.percent %}
+                                -{{ discount.percent }}%
+                            {% else %}
+                                {% if discount.current_price %}
+                                    {{ discount.current_price }} р.
+                                {% else %}
+                                    БЕСПЛАТНО
+                                {% endif %}
+                            {% endif %}
+                            </span></td>
+                        </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+                    {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
+
+            {% with forloop.last as parent_last %}
+            {% for close in info.close %}
+                </li>
+                {% if parent_last and forloop.last %}{% else %}</ul>{% endif %}
+            {% endfor %}
+            {% endwith %}
+        {% endfor %}
+{% endkwacro %}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Прейскурант на услуги стоматологического центра "Рябина"</title>
+
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 0.7cm 0.7cm 1.4cm 0.7cm;
+
+            @frame header_frame {
+                -pdf-frame-content: header_content;
+                left: 0.7cm;
+                top: 0.7cm;
+                height: 0.1cm;
+                width: 19.6cm;
+            }
+
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                left:0.7cm;
+                height: 0.7cm;
+                width: 19.6cm;
+                bottom: 0.7cm;
+            }
+        }
+
+        @font-face {
+            font-family: OpenSans;
+            src: url('{% static_dir %}font/OpenSans/OpenSans-Regular.ttf');
+        }
+
+        @font-face {
+            font-family: OpenSansBold;
+            src: url('{% static_dir %}font/OpenSans/OpenSans-Bold.ttf');
+        }
+
+        @font-face {
+            font-family: OpenSansItalic;
+            src: url('{% static_dir %}font/OpenSans/OpenSans-Italic.ttf');
+        }
+
+        @font-face {
+            font-family: OpenSansBoldItalic;
+            src: url('{% static_dir %}font/OpenSans/OpenSans-BoldItalic.ttf');
+        }
+
+        #footer_content{
+            font-family: "OpenSans", Tahoma, sans-serif;
+            text-align: left;
+            }
+
+        #header_content{
+            text-align: right;
+            font-family: "OpenSans", Tahoma, sans-serif;
+        }
+
+        body {
+           font-family: OpenSans;
+           font-size: 9pt;
+        }
+
+        span.h1{
+            font-family: OpenSansBold;
+            font-size: 19pt;
+        }
+
+        span.h2{
+            font-family: OpenSansBold;
+            font-size: 12pt;
+        }
+
+        span.footer{
+            font-family: OpenSansItalic;
+            font-size: 24pt;
+        }
+
+        span.header{
+            font-family: OpenSansBold;
+            font-size: 12pt;
+        }
+
+        span.title{
+            font-size: 10pt;
+            font-family: OpenSansBold;
+        }
+
+        span.item{
+            font-size: 10pt;
+            font-family: OpenSans;
+        }
+
+        span.discount{
+            font-size: 10pt;
+            font-family: OpenSansItalic;
+            color: red;
+        }
+
+        span.discount_title{
+            font-size: 12pt;
+            font-family: OpenSans;
+        }
+
+        span.discount_price{
+            font-size: 14pt;
+            font-family: OpenSans;
+            color: red;
+        }
+
+        span.price{
+            font-size: 10pt;
+            font-family: OpenSans;
+        }
+
+        table{
+            padding: 0px;
+        }
+
+        li{
+            list-style: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="header_content"></div>
+<div id="footer_content">
+Прейскурант на услуги стоматологического центра "Рябина" от {% now "SHORT_DATE_FORMAT" %} / стр. <pdf:pagenumber> из
+<pdf:pagecount>
+</div>
+<div id="main_content">
+    <table cellpadding="0" cellspacing="0" border="0" height="106px">
+        <tr>
+            <td width="226px"><img src="{% static_dir %}img/logo/report.jpg" height="106px"></td>
+            <td width="508px" valign="top">
+                <table cellpadding="5" cellspacing="0" border="0">
+                    <tr>
+                        <td align="left"><span class="h1">Стоматологический центр "Рябина"</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><span class="h2">Прейскурант на стоматологические услуги от {% now "SHORT_DATE_FORMAT" %}</span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+    {% for course in courses %}
+        <ul>
+        {% get_course_services course as services %}
+        {% if services|length %}
+        <li>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:768px;">
+        <tr>
+            <td width="768px" valign="top" align="center" colspan="3"><span class="header">{{ course.title }}</span></td>
+        </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+        </li>
+        {% for course_service in services %}
+            {% get_services_annotated_list course_service as services_annotated_list %}
+            {% usekwacro services_info service_annotated_list=services_annotated_list %}
+        {% endfor %}
+        {% endif %}
+        </ul>
+    {% endfor %}
+    {% if discounts|length %}
+    <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+    <table cellpadding="0" cellspacing="0" border="0" style="width:768px;">
+        <tr>
+            <td width="768px" valign="top" align="center" colspan="3"><span class="header">Акции и скидки</span></td>
+        </tr>
+    {% for discount in discounts %}
+        {% cycle 1 2 as row silent %}
+        {% if row == 1 %}<tr><td>&nbsp;</td></tr><tr>{% endif %}
+        {% if row == 2 %}<td width="10px">&nbsp;</td>{% endif %}
+            <td width="379px" align="center" valign="top">
+                <table cellpadding="0" cellspacing="5" border="0" style="width:384px;">
+                    <tr>
+                        <td><span class="discount_title">{{ discount.title }}</span></td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    {% if discount.image %}
+                    <tr>
+                        <td><img src="{% media_dir %}{{ discount.image }}" width="380px"></td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    {% endif %}
+                    <tr>
+                        <td><span class="discount_price">{% if discount.percent %}Скидка {{ discount.percent }}%{% else %}{% if discount.price or discount.old_price %}{% if discount.old_price %}<strike>{{ discount.old_price }}</strike> {% endif %}{{ discount.current_price }} р.{% else %}БЕСПЛАТНО{% endif %}{% endif %}</span></td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td align="left">{{ discount.content|striptags|safe }}</td>
+                    </tr>
+                    <tr>
+                        <td align="right">Акция действует с {{ discount.created_at|date:"SHORT_DATE_FORMAT" }}{% if discount.close_at %} до {{ discount.close_at|date:"SHORT_DATE_FORMAT" }}{% endif %}</td>
+                    </tr>
+                </table>
+            </td>
+        {% if row == 2 or forloop.last %}</tr>{% endif %}
+    {% endfor %}
+    </table>
+    {% endif %}
+    <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+    <table cellpadding="0" cellspacing="10" border="0" style="width:768px;">
+        <tr>
+            <td width="768px" align="center">
+                <span class="footer">Добро пожаловать в стоматологический центр "Рябина"!</span>
+            </td>
+        </tr>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" style="width:768px; height:10px;"><tr><td>&nbsp;</td></tr></table>
+    <table cellpadding="0" cellspacing="10" border="0" style="width:768px;">
+        <tr>
+            <td width="768px" height="150px" align="right">
+               {% qr_code qr_host 150 qr_data %}
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

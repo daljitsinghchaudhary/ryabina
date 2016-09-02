@@ -1,0 +1,18 @@
+Online запись № {{ visit.id }}
+
+{{ visit.name }} хочет записаться на приём.
+
+Телефон: {{ visit.phone }}
+E-mail: {{ visit.email }}
+Вид поцедуры: {{ visit.get_procedure }}
+Направление: {{ visit.purpose }}
+Дата приёма: {{ visit.visit_date|date:"SHORT_DATE_FORMAT" }}
+Время приёма: {{ visit.visit_time|date:"H:i" }}
+
+Пожелаения:
+{{ visit.description }}
+
+Дата и время обращения: {{ visit.created_at|date:"SHORT_DATETIME_FORMAT" }}
+------------
+С уважением,
+Стоматологический центр "Рябина"

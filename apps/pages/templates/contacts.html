@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load thumbnail bootstrap3 %}
+
+{% block js %}
+    <script src="{{ STATIC_URL }}fancybox/jquery.fancybox.js"></script>
+    <script src="{{ STATIC_URL }}isotope/dist/isotope.pkgd.js"></script>
+    <script src="{{ STATIC_URL }}isotope-cells-by-row/cells-by-row.js"></script>
+    <script src="//npmcdn.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
+    <script src="http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/contacts.js"></script>
+{% endblock %}
+
+{% block css %}
+    <link href="{{ STATIC_URL }}fancybox/jquery.fancybox.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/contacts.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+        <section class="hero"></section>
+{% endblock %}
+
+{% block content %}
+<div id="content-contacts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><h1>Контактные данные</h1></div>
+        </div>
+        <div class="row visible-md visible-lg">
+            <div class="col-md-2 col-md-offset-1 col-sm-4 col-xs-6 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-map-marker"></span></div>
+                <h4>Адрес</h4>
+                <span class="pseudo_link">Санкт-Петербург, 16 линия, д. 11, лит. Б, пом. 1-Н</span>
+            </div>
+            <div class="col-md-2 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-clock-o"></span></div>
+                <h4>Время работы</h4>
+                <span class="pseudo_link">10:00 - 21:00</span>
+            </div>
+            <div class="col-md-2 contact_item">
+                <a href="tel:+79219177536">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-phone"></span></div>
+                    <h4>Телефон</h4>
+                    <span class="pseudo_link">(812) 917-75-36</span>
+                </a>
+            </div>
+            <div class="col-md-2 contact_item">
+                <a href="mailto:info@ryabinaclinic.ru">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-envelope-o"></span></div>
+                    <h4>Почта</h4>
+                    <span class="pseudo_link">info@ryabinaclinic.ru</span>
+                </a>
+            </div>
+            <div class="col-md-2 contact_item">
+                <a href="skype:ryabinaclinic?call">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-skype"></span></div>
+                    <h4>SKYPE</h4>
+                    <span class="pseudo_link">Позвонить</span>
+                </a>
+            </div>
+        </div>
+        <div class="row visible-sm">
+            <div class="col-sm-4 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-map-marker"></span></div>
+                <h4>Адрес</h4>
+                <span class="pseudo_link">Санкт-Петербург, 16 линия, д. 11, лит. Б, пом. 1-Н</span>
+            </div>
+            <div class="col-sm-4 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-clock-o"></span></div>
+                <h4>Время работы</h4>
+                <span class="pseudo_link">10:00 - 21:00</span>
+            </div>
+            <div class="col-sm-4 contact_item">
+                <a href="tel:+79219177536">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-phone"></span></div>
+                    <h4>Телефон</h4>
+                    <span class="pseudo_link">(812) 917-75-36</span>
+                </a>
+            </div>
+        </div>
+        <div class="row visible-sm">
+            <div class="col-sm-offset-2 col-sm-4 contact_item">
+                <a href="mailto:info@ryabinaclinic.ru">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-envelope-o"></span></div>
+                    <h4>Почта</h4>
+                    <span class="pseudo_link">info@ryabinaclinic.ru</span>
+                </a>
+            </div>
+            <div class="col-sm-4 contact_item">
+                <a href="skype:ryabinaclinic?call">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-skype"></span></div>
+                    <h4>SKYPE</h4>
+                    <span class="pseudo_link">Позвонить</span>
+                </a>
+            </div>
+        </div>
+        <div class="row visible-xs">
+            <div class="col-xs-6 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-map-marker"></span></div>
+                <h4>Адрес</h4>
+                <span class="pseudo_link">Санкт-Петербург, 16 линия, д. 11, лит. Б, пом. 1-Н</span>
+            </div>
+            <div class="col-xs-6 contact_item">
+                <div class="circle"><div class="circle_pulse"></div><span class="icon-clock-o"></span></div>
+                <h4>Время работы</h4>
+                <span class="pseudo_link">10:00 - 21:00</span>
+            </div>
+        </div>
+        <div class="row visible-xs">
+            <div class="col-xs-offset-3 col-xs-6 contact_item">
+                <a href="tel:+79219177536">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-phone"></span></div>
+                    <h4>Телефон</h4>
+                    <span class="pseudo_link">(812) 917-75-36</span>
+                </a>
+            </div>
+        </div>
+        <div class="row visible-xs">
+            <div class="col-xs-6 contact_item">
+                <a href="mailto:info@ryabinaclinic.ru">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-envelope-o"></span></div>
+                    <h4>Почта</h4>
+                    <span class="pseudo_link">info@ryabinaclinic.ru</span>
+                </a>
+            </div>
+            <div class="col-xs-6 contact_item">
+                <a href="skype:ryabinaclinic?call">
+                    <div class="circle"><div class="circle_pulse"></div><span class="icon-skype"></span></div>
+                    <h4>SKYPE</h4>
+                    <span class="pseudo_link">Позвонить</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<a name="map"></a>
+<div id="content-map">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><h4>Стоматологический центр на карте</h4></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="map_container">
+                    <div id="map-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn map_btn route" href="javascript:void(0);">От метро Василеостровская</a>
+                <a class="btn map_btn increase" href="javascript:void(0);">Увеличить <span class="glyphicon glyphicon-plus"></span></a>
+                <a class="btn map_btn reduce" href="javascript:void(0);">Уменьшить <span class="glyphicon glyphicon-minus"></span></a>
+                <a class="btn map_btn fullscreen" href="javascript:void(0);">Во весь экран <span class="glyphicon glyphicon-fullscreen"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% if contacts_images|length %}
+<div id="content-images">
+    <div class="container">
+        <!--<div class="row">-->
+            <!--<div class="col-md-12"><h4>Фотографии стоматологического центра</h4></div>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn contacts_images_btn" data-filter="*" href="javascript:void(0);">Показать всё</a>
+                {% for contacts_images_type in contacts_images_types %}
+                    <a class="btn contacts_images_btn" data-filter=".type_{{ contacts_images_type.id }}" href="javascript:void(0);">{{ contacts_images_type.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row contacts_images_isotope_grid contacts_images">
+                    {% for contacts_image in contacts_images %}
+                    <div class="col-sm-6 col-md-4 contacts_images_isotope_item contacts_image_container type_{{ contacts_image.image_type_id }}">
+                        <div class="contacts_image_content">
+                                {% thumbnail contacts_image.image "350x350" as thumb %}
+                                <div class="contacts_image" style="width:{{ thumb.width }}px; height:{{ thumb.height }}px;">
+                                    {% thumbnail contacts_image.image "750x750" as fancy %}
+                                    <a class="fancy" title="{{ contacts_image.title }}" href="{{ fancy.url }}">
+                                    {% endthumbnail %}
+                                    <img src="{{ thumb.url }}">
+                                    </a>
+                                </div>
+                                {% endthumbnail %}
+                            </a>
+                            <div class="contacts_image_title">{{ contacts_image.title }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div id="content-feedback">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalQuestion">Задать вопрос</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalVisit">Записаться на приём</a>
+                <a class="btn contacts_btn" href="#" data-toggle="modal" data-target="#modalCallback">Обратный звонок</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="feedback_container">
+                    <h3>Пишите нам на здоровье</h3>
+                    <h4>Форма для связи</h4>
+                    {% if form.non_field_errors or form.errors %}
+                    <legend class="error">Ошибка!</legend>
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-error">
+                            <p>{{ form.non_field_errors }}</p>
+                            <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+                        </div>
+                        {% endif %}
+                    {% else %}
+
+                    {% endif %}
+                    <form role="form" method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% bootstrap_field field show_label=True layout='horizontal' horizontal_label_class='col-md-3' horizontal_field_class='col-md-9' %}
+                        {% endfor %}
+                        <div class="form-group controls">
+                            <button type="submit" class="btn btn-default">Отправить</button><p>Так же вы можете писать по адресу <a href="mailto:info@ryabinaclinic.ru">info@ryabinaclinic.ru</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="comments_container">
+
+                <!-- Put this script tag to the <head> of your page -->
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?125"></script>
+<script type="text/javascript">
+    VK.init({apiId: 5610453, onlyWidgets: true});
+</script>
+
+<!-- Put this div tag to the place, where the Comments block will be -->
+<div id="vk_comments"></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {redesign: 1, limit: 5, width: "330", attach: false});
+</script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

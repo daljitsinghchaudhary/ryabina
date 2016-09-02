@@ -1,0 +1,11 @@
+<h1><a href="http://{{ site.domain }}{% url 'admin:questions_callback_change' callback.id %}">Обратный звонок № {{ callback.id }}</a></h1>
+<p></p>
+<p><b>{{ callback.name }}</b> ждет обратного звонка {{ callback.get_callback_delta }}.</p>
+<p></p>
+<p><b>Телефон:</b> {{ callback.phone }}</p>
+<p><b>Необходимо набрать номер в:</b> {{ callback.callback_time|date:"H:i" }}</p>
+<p></p>
+<p><b>Дата и время обращения:</b> {{ callback.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+<p>------------</p>
+<p>С уважением,</p>
+<p>Стоматологический центр "Рябина"</p>

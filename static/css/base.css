@@ -1,0 +1,561 @@
+body {
+  color: #5a5a5a;
+}
+
+h1{
+    font-family: 'BlissPro-Light';
+    text-transform: uppercase;
+    font-size:18px;
+}
+
+h3{
+    font-family: 'BlissPro-Light';
+    text-transform: uppercase;
+    font-size:16px;
+}
+
+h4{
+    text-align: center;
+    font-family: 'BlissPro-Light';
+    text-transform: uppercase;
+    font-size:14px;
+}
+
+a{
+    text-decoration: none;
+    -webkit-transition: all 100ms ease-out;
+    -o-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
+}
+
+a:hover, a:active, a:focus, a:visited{
+    text-decoration: none;
+}
+
+
+.navbar-brand {
+    float: left;
+    padding: 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
+}
+
+.navbar-contacts{
+    display:none;
+    position:absolute;
+    z-index:1000;
+    right: 100px;
+    top: -1px;
+    padding-right:15px;
+}
+
+.navbar-contacts li{
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+.navbar-contacts li a span{
+    margin-right: 5px;
+    position: relative;
+    top: 5px;
+}
+
+.navbar-contacts > .navbar-nav > li > a{
+    padding: 0;
+}
+
+.navbar-collapse li.social{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-size: cover !important;
+    margin-right: 15px;
+    top: 70px; /*67px*/
+    cursor: pointer;
+    -webkit-transition: all 100ms ease-out;
+    -o-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
+}
+
+.navbar-collapse li.social a{
+    padding: 6px;
+}
+
+.navbar-collapse li.social a span{
+    color: white;
+    font-size: 20px;
+}
+
+.navbar-collapse li.social:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.navbar-collapse li.social.ok{
+    background-color: #EB722E;
+    /*background: url("../img/social/go.png") no-repeat;*/
+    margin-right: 5px;
+}
+
+.navbar-collapse li.social.ok a{
+    padding-left: 10px;
+    padding-top: 7px;
+}
+
+.navbar-collapse li.social.fb{
+    background-color: #3b5998;
+    /*background: url("../img/social/fb.png") no-repeat;*/
+}
+
+.navbar-collapse li.social.fb a{
+    padding-left: 11px;
+    padding-top: 7px;
+}
+
+.navbar-collapse li.social.vk{
+    margin-left: 15px;
+    background-color: #5B7FA6;
+    /*background: url("../img/social/vk.png") no-repeat;*/
+}
+
+
+.navbar-wrapper {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.logo_svg_text {
+    position: absolute;
+    background-image: url("../img/logo/ryabina_logo_with_text.svg");
+    background-position-x: 100%;
+    background-position-y: 50%;
+    background-size: contain;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-repeat: no-repeat;
+    top: -7px;
+    left: 14px;
+    width: 150px;
+    height: 65px;
+}
+
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    border: none;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #000;
+    background-color: #fff;
+}
+
+.navbar-wrapper .navbar {
+  border:0;
+  border-radius: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-family: 'BlissPro-Light';
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:16px;
+  background: #f3f3f3; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #E3E3E3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#E3E3E3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ffffff 0%, #E3E3E3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#E3E3E3',GradientType=0 ); /* IE6-9 */
+
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(10, 8, 8, 0.2);
+  -moz-box-shadow: 0px 0px 40px 0px rgba(10, 8, 8, 0.2);
+  -ms-box-shadow: 0px 0px 40px 0px rgba(10, 8, 8, 0.2);
+  box-shadow: 0px 0px 40px 0px rgba(10, 8, 8, 0.2);
+}
+
+
+footer{
+    height: 100px;
+    padding-top: 30px;
+    /*background: #76a0ac;*/
+    /*background: #240b20;*/
+    background: #f7f7f7;
+    background-image: -webkit-linear-gradient(top, #dbe1e5 0, #fff 100%);
+    background-image: linear-gradient(to bottom, #dbe1e5 0, #fff 100%);
+}
+
+footer .footer_logo{
+    float: left;
+    margin-right: 14px;
+    background-image: url(../img/logo/ryabina_logo_without_text.svg);
+    /*background-position: 0 -55px;*/
+    width: 57px;
+    height: 42px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+footer .footer_copyright {
+    margin-right: 100px;
+    padding-top: 8px;
+    font-size: 11px;
+    line-height: 15px;
+    color: #707e87;
+}
+footer .footer_copyright p{
+    margin: 0px;
+    position: relative;
+}
+
+footer .footer_copyright .copyright_symbol {
+    position: absolute;
+    top: 0;
+    left: 57px;
+}
+
+footer .footer_als{
+    position: absolute;
+    right: 0px;
+    top: 30%;
+}
+
+.modal-backdrop.in {
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
+
+.bootbox .modal-backdrop{
+    background-color: #2f4f4f;/*#551d3e;*/
+}
+
+.bootbox .modal-content:before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: -200px;
+    right: -180px;
+    -webkit-transform: translate(0, -40%);
+    -moz-transform: translate(0, -40%);
+    -ms-transform: translate(0, -40%);
+    transform: translate(0, -40%);
+    width: 425px;
+    height: 225px;
+    background: url(../img/bg/modal_rowan.png) no-repeat;
+    -webkit-transition: all cubic-bezier(0.26, 0.86, 0.44, 0.985) 0.4s !important;
+    -o-transition: all cubic-bezier(0.26, 0.86, 0.44, 0.985) 0.4s !important;
+    transition: all cubic-bezier(0.26, 0.86, 0.44, 0.985) 0.4s !important;
+    opacity: 1;
+}
+
+.bootbox .modal-content {
+    border-radius: 20px;
+    margin-bottom: 150px;
+}
+
+.bootbox button.close{
+    font-size: 30px;
+    position: relative;
+    left: 15px;
+}
+
+
+.bootbox label.control-label{
+    font-family: 'BlissPro-Light';
+    font-size:13px;
+    text-transform: uppercase;
+    text-align:right;
+    padding: 20px 0 0 0;
+    line-height: 1;
+}
+
+.bootbox input[type=url],
+.bootbox input[type=text],
+.bootbox input[type=email],
+.bootbox select,
+.bootbox textarea {
+    padding: 15px 15px 13px;
+    height: auto !important;
+    font-family:  'BlissPro-Light';
+    font-size: 16px;
+    line-height: 20px;
+    color: black;
+    /*border: 2px solid #D5DDE0;*/
+    border-radius: 8px;
+    /*box-shadow: none;*/
+    -webkit-transition: all 100ms ease-out;
+    -o-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -moz-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -ms-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+}
+
+.bootbox input[type=url]:focus,
+.bootbox input[type=text]:focus,
+.bootbox input[type=email]:focus,
+.bootbox select:focus,
+.bootbox textarea:focus {
+    border-color: #881C70;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+/*.bootbox input[type=text]:hover{*/
+    /*border-color: transparent;*/
+/*}*/
+
+.bootbox h3{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+}
+
+.bootbox .form-group{
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.bootbox .form-group.controls{
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 50px;
+}
+
+.bootbox .bootbox-body{
+    padding: 20px;
+}
+
+.bootbox .form-group.controls button{
+    /*border: 2px solid #CDD3D8;*/
+    /*color: black;*/
+    /*border-radius: 8px;*/
+    /*letter-spacing: 1px;*/
+    /*text-transform: uppercase;*/
+    /*font-size: 18px;*/
+    /*font-family: 'BlissPro-Light';*/
+    /*margin: 10px;*/
+    /*background-color: #f8f8f8;*/
+
+    border-radius: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 18px;
+    /* color: rgb(90, 90, 90); */
+    font-family: 'BlissPro-Light';
+    border: none;
+    color: white;
+    background-color: #EB722E;
+}
+
+.bootbox .form-group.controls button:hover{
+    /*color: #425130;*/
+    background-color: #c7642d;
+}
+
+.bootbox .input-group-addon{
+    padding: 0 5px 0;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    -webkit-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -moz-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -ms-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+}
+
+.bootbox input[name=captcha_1]{
+    border-radius: 8px;
+    margin-left: 40px;
+}
+
+.bootbox input[name=captcha_1]:focus{
+    outline: none;
+}
+
+.bootbox .stars .radio-inline{
+    position: relative;
+    font-size: 24px;
+    margin-left: 0;
+    padding-left:0;
+    width: 30px;
+    height: 30px;
+}
+
+.bootbox .stars{
+    display: block;
+    position: relative;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.bootbox .stars{
+    unicode-bidi: bidi-override; /* сделать следующие - предыдущими, а предыдущие - следующими  (перевернуть направление для использования + и ~) */
+    direction: rtl;
+    font-size: 0; /* удаление промежутков */
+}
+
+.bootbox .stars > input{
+    display: none;
+}
+
+.bootbox .stars > input + .glyphicon{
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.bootbox .stars > input + .glyphicon:before {
+    -webkit-transition: -webkit-color 0.5s;
+    -moz-transition: -moz-color 0.5s;
+    -ms-transition: -ms-color 0.5s;
+    -o-transition: -o-color 0.5s;
+    transition: color 0.5s;
+}
+
+.bootbox .stars > input:checked ~ .glyphicon:before,
+.bootbox .stars > input + .glyphicon:hover ~ .glyphicon:before,
+.bootbox .stars > input + .glyphicon:hover:before{
+    content: "\e006";
+    color: #c7642d;
+}
+
+.bootbox .stars:hover > input + .glyphicon:before {
+    content: "\e007";
+    color: #595959;
+}
+
+.bootbox .stars:hover > input + .glyphicon:hover ~ .glyphicon:before, /* поставить звезду на все следующие если навели мыши */
+.bootbox .stars:hover > input + .glyphicon:hover:before /* поставить звезду если навели мышь */
+{
+    content: "\e006";
+    color: #c7642d;
+}
+
+#photo_container{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -moz-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    -ms-box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    box-shadow: 0 25px 40px 0 rgba(112, 109, 98, 0.3);
+    border-radius: 8px;
+}
+#photo_container div.photo,
+#photo_container{
+    height: 240px;
+    width: 160px;
+}
+
+#photo_container div.photo{
+    top: 0;
+    left: 0;
+    position: absolute;
+    cursor: pointer;
+    background: url('../img/default_main_avatar.png') no-repeat;
+    background-position: center;
+}
+
+#photo_container:hover{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+#photo_container:hover div.photo{
+    border: 1px solid #881C70;
+    top:1px;
+    left:1px;
+    height: 238px;
+    width: 158px;
+}
+
+#photo_container div.change_photo{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 6px;
+    border-radius: 4px;
+}
+
+#photo_container div.delete_photo.default{
+    display: none;
+}
+
+#photo_container div.delete_photo{
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 6px 6px 2px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+    z-index: 3;
+    color: rgb(51, 51, 51);
+}
+
+@media (min-width: 450px){
+   .navbar-contacts{
+        display:block;
+   }
+}
+
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 700px;
+    }
+
+
+    h3{
+        font-size:24px;
+    }
+
+    h4{
+        font-size:18px;
+    }
+
+    .navbar-wrapper .navbar {
+       height:125px;
+    }
+
+   .logo_svg_text {
+        width: 250px;
+        height: 105px;
+        top: 10px;
+        left:30px;
+   }
+
+   .navbar-nav > li.menu > a{
+       padding-top: 75px;
+       border-bottom-left-radius: 20px;
+       border-bottom-right-radius: 20px;
+       font-size: 25px;
+   }
+
+    .navbar-contacts{
+        right:20px;
+    }
+
+    .navbar-contacts li{
+        padding-top: 15px;
+        font-size: 30px;
+    }
+
+    .navbar-contacts li i{
+        margin-right:5px;
+        top:6px;
+    }
+}
