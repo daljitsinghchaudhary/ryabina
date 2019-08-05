@@ -1,4 +1,4 @@
 # ryabina
 ryabina stomatology
 
-[http://ryabinastom.ru](http://ryabinastom.ru) - original site
+[http://ryabina.sinyawskiy.ru](http://ryabina.sinyawskiy.ru) - original site
